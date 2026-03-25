@@ -1,0 +1,50 @@
+syntax = "proto3";
+import "google/protobuf/timestamp.proto";
+
+option csharp_namespace = "RESTvsGRPC.Shared.gRPC";
+
+package weather;
+
+service GrpcWeatherService {
+    rpc GetWeatherForecast (GrpcWeatherRequest)
+		returns (GrpcWeatherResponse);
+}
+
+message GrpcWeatherRequest {
+    string location_id = 1;
+    int32 days_requested = 2;
+    bool include_alerts = 3;
+}
+
+message GrpcWeatherResponse {
+    string location_name = 1;
+    double latitude = 2;
+    double longitude = 3;
+    repeated GrpcDailyForecast forecasts = 4;
+    map<string, string> station_metadata = 5;
+}
+
+message GrpcDailyForecast {
+    google.protobuf.Timestamp date = 1;
+    int32 temperature_c = 2;
+    int32 temperature_f = 3;
+    string summary = 4;
+    GrpcWeatherCondition condition = 5;
+    optional double precipitation_prob = 6;
+    repeated GrpcWeatherAlert alerts = 7;
+}
+
+enum GrpcWeatherCondition {
+    GRPC_WEATHER_CONDITION_UNSPECIFIED = 0;
+    GRPC_WEATHER_CONDITION_SUNNY = 1;
+    GRPC_WEATHER_CONDITION_CLOUDY = 2;
+    GRPC_WEATHER_CONDITION_RAINY = 3;
+    GRPC_WEATHER_CONDITION_SNOWY = 4;
+    GRPC_WEATHER_CONDITION_THUNDERSTORM = 5;
+}
+
+message GrpcWeatherAlert {
+    string alert_type = 1;
+    string description = 2;
+    int32 severity_level = 3;
+}

@@ -1,0 +1,6 @@
+<Solution>
+  <Project Path="RESTvsGRPC.BenchmarkClient/RESTvsGRPC.BenchmarkClient.csproj" />
+  <Project Path="RESTvsGRPC.gRPC/RESTvsGRPC.gRPC.csproj" />
+  <Project Path="RESTvsGRPC.REST/RESTvsGRPC.REST.csproj" />
+  <Project Path="RESTvsGRPC.Shared/RESTvsGRPC.Shared.csproj" />
+</Solution>
